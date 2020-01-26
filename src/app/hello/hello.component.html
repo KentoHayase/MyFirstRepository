@@ -1,0 +1,16 @@
+<body bgcolor="#dcd6d9">
+    <h1>{{ title }}</h1>
+    <div>
+        <input type="text" [(ngModel)]="input1" />
+        <button (click)="push()">追加</button>
+        <button (click)="pop()">最新を削除</button>
+    </div>
+    <hr />
+    <app-message #list1 [content]="message" (action)="doClick($event)"></app-message>
+    <hr />
+    <p>this is NO style Directive</p>
+    <p appMystyle>this is MY-style Directive</p>
+    <p appMystyle c="brown" bg="pink">this is MY-style Directive</p>
+    <hr />
+    <app-range-input-datetime [isEnableTime]="true"></app-range-input-datetime>
+</body>

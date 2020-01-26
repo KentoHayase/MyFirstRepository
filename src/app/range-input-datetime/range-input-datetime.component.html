@@ -1,0 +1,20 @@
+<div class="form-inline">
+    <div class="form-inline">
+        <button class="btn" (click)="debug(valueB)">test</button>
+        <!-- ↓ 開始日 -->
+        <div class="forn-group">
+            <ng2-flatpickr
+                [(ngModel)]="valueB"
+                (input)="debug(valueB)"
+                [config]="optionsBigining"
+                placeholder="終了日以前の日付を入力してください"
+                #dateB
+            ></ng2-flatpickr>
+        </div>
+        ～
+        <!-- ↓ 終了日 -->
+        <div class="forn-group">
+            <ng2-flatpickr [(ngModel)]="valueE" [config]="optionsEnd" #dateE></ng2-flatpickr>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="form-inline">
+    <!-- ↓ 開始日 -->
+    <div class="forn-group" *ngIf="flgBOrE">
+        <ng2-flatpickr [config]="optionsBigining" #dateB></ng2-flatpickr>
+    </div>
+    <!-- ↓ 終了日 -->
+    <div class="forn-group" *ngIf="!flgBOrE">
+        <ng2-flatpickr [config]="optionsEnd" #dateE></ng2-flatpickr>
+    </div>
+    <div class="fomr-group-append">
+        <button type="button" class="btn btn-primary" (click)="toggleE()">
+            <i class=" far fa-calendar-alt"></i>
+        </button>
+    </div>
+</div>
