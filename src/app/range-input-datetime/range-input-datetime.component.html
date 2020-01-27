@@ -5,16 +5,24 @@
         <div class="forn-group">
             <ng2-flatpickr
                 [(ngModel)]="valueB"
-                (input)="debug(valueB)"
                 [config]="optionsBigining"
-                placeholder="終了日以前の日付を入力してください"
                 #dateB
+                (input)="replace()"
+                (input)="replaceMinDate()"
+                placeholder="終了日以前を入力してください"
             ></ng2-flatpickr>
         </div>
         ～
         <!-- ↓ 終了日 -->
         <div class="forn-group">
-            <ng2-flatpickr [(ngModel)]="valueE" [config]="optionsEnd" #dateE></ng2-flatpickr>
+            <ng2-flatpickr
+                [(ngModel)]="valueE"
+                [config]="optionsEnd"
+                #dateE
+                (input)="replace()"
+                (input)="replaceMaxDate()"
+                placeholder="開始日以後を入力してください"
+            ></ng2-flatpickr>
         </div>
     </div>
 </div>

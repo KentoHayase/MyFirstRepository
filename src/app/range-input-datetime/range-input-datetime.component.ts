@@ -13,15 +13,17 @@ export class RangeInputDatetimeComponent implements OnInit {
     @Input() flgBOrE: boolean; //true⇒開始日 ,false⇒終了日
     @Output() event = new EventEmitter<string>();
     @Input() isEnableTime: boolean;
-    @ViewChild('dateB', { static: true }) dateBigining;
-    @ViewChild('dateE', { static: true }) dateEnd;
     valueB = [new Date()];
     valueE = [new Date()];
 
-    @Input() set vb(value: Date) {
+    @Input() set _valueB(value: Date) {
         if (this.valueE[0] >= value) {
             this.valueB[0] = value;
-        } else {
+        }
+    }
+    @Input() set _valueE(value: Date) {
+        if (this.valueB[0] <= value) {
+            this.valueE[0] = value;
         }
     }
 
@@ -34,18 +36,12 @@ export class RangeInputDatetimeComponent implements OnInit {
     endDate = new Date();
 
     constructor() {}
-
-    compareDateOrder(valueB, valueE) {
-        return valueB > valueE ? null : { compareOrder: { valid: false } };
-    }
-
     ngOnInit() {
         if (this.isEnableTime) {
             this.beginningDate.setHours(0, 0, 0);
             this.endDate.setHours(23, 59, 59);
         } else {
             this.beginningDate.setDate(1);
-
             this.endDate.setMonth(this.endDate.getMonth() + 1);
             this.endDate.setDate(0);
         }
@@ -62,6 +58,7 @@ export class RangeInputDatetimeComponent implements OnInit {
             altInputClass: 'hoge', //スタイルを適用
             maxDate: this.valueE[0],
         };
+        console.log({ デフォ開始日: this.optionsBigining.defaultDate });
 
         this.optionsEnd = {
             locale: Japanese, // ロケールを日本
@@ -75,20 +72,23 @@ export class RangeInputDatetimeComponent implements OnInit {
             altInputClass: 'form-control', //スタイルを適用
             minDate: this.valueB[0],
         };
+        console.log({ デフォ終了日: this.optionsEnd.defaultDate });
     }
-    debug() {
-        if (this.valueB.length === 0 || this.valueE.length === 0) {
-            this.valueB = [new Date()];
-            // if (this.isEnableTime) {
-            //     this.beginningDate.setHours(0, 0, 0);
-            //     this.endDate.setHours(23, 59, 59);
-            // } else {
-            //     this.beginningDate.setDate(1);
-
-            //     this.endDate.setMonth(this.endDate.getMonth() + 1);
-            //     this.endDate.setDate(0);
-            // }
+    replace() {
+        if (this.valueB.length === 0) {
+            this.valueB[0] = this.beginningDate;
         }
-        console.log({ 開始日: this.valueB, 終了日: this.valueE });
+        if (this.valueE.length === 0) {
+            this.valueE[0] = this.endDate;
+        }
+        console.log({ 開始日: this.valueB[0], 終了日: this.valueE[0] });
+    }
+    replaceMinDate() {
+        this.optionsEnd.minDate = this.valueB[0];
+        console.log({ 最小値of終了日: this.optionsEnd.minDate });
+    }
+    replaceMaxDate() {
+        this.optionsBigining.maxDate = this.valueE[0];
+        console.log({ 最大値of開始日: this.optionsBigining.maxDate });
     }
 }

@@ -18,7 +18,7 @@ export class HelloComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {
-        this.title = 'hello-appppppppppppppppppppppppp';
+        this.title = 'hello-appppppp';
         this.message = ['First item', 'Second item', 'Third item'];
         this.input1 = '';
     }
