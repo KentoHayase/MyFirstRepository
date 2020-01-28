@@ -17,7 +17,7 @@ export class RangeInputDatetimeComponent implements OnInit {
     @Input() isEnableTime: boolean;
     valueB = [new Date()];
     valueE = [new Date()];
-    @ViewChild('dateB', { static: true }) pickerStart;
+    @ViewChild('dateB', { static: true }) pickerBigining;
     @ViewChild('dateE', { static: true }) pickerEnd;
     @Input() set _valueB(value: Date) {
         if (this.valueE[0] >= value) {
@@ -33,12 +33,10 @@ export class RangeInputDatetimeComponent implements OnInit {
     // 開始日のOptions
     optionsBigining: FlatpickrOptions;
     beginningDate = new Date();
-    fpBigining = flatpickr('#myID', {});
 
     // 終了日のOptions
     optionsEnd: FlatpickrOptions;
     endDate = new Date();
-    fpEnd = flatpickr('#myID', {});
 
     constructor() {}
     ngOnInit() {
@@ -88,16 +86,13 @@ export class RangeInputDatetimeComponent implements OnInit {
         console.log({ 開始日: this.valueB[0], 終了日: this.valueE[0] });
     }
     replaceMinDate() {
-        this.pickerEnd.flatpickr.minDate = this.valueB[0];
         this.pickerEnd.flatpickr.set({
             minDate: new Date(this.valueB[0].setDate(this.valueB[0].getDate() + 1)),
-        });
-        console.log({
-            最小値of終了日: new Date(this.pickerEnd.flatpickr.minDate + 1),
-        });
+        }); //一日刻み選べない問題発生中！！
     }
     replaceMaxDate() {
-        this.optionsBigining.maxDate = this.valueE[0];
-        console.log({ 最大値of開始日: this.optionsBigining.maxDate });
+        this.pickerBigining.flatpickr.set({
+            maxDate: new Date(this.valueE[0].setDate(this.valueE[0].getDate() - 1)),
+        });
     }
 }
