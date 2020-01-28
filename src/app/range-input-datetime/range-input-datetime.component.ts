@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ChangeDetectorRef } from '@angular/core';
 import { FlatpickrOptions, FlatpickrEvent } from 'ng2-flatpickr';
 import { Japanese } from 'flatpickr/dist/l10n/ja.js';
 import { Output, EventEmitter } from '@angular/core';
 import { from } from 'rxjs';
+import flatpickr from 'flatpickr';
+import { FlatpickrInstance } from 'ng2-flatpickr/src/flatpickr-instance';
 
 @Component({
     selector: 'app-range-input-datetime',
@@ -15,7 +17,8 @@ export class RangeInputDatetimeComponent implements OnInit {
     @Input() isEnableTime: boolean;
     valueB = [new Date()];
     valueE = [new Date()];
-
+    @ViewChild('dateB', { static: true }) pickerStart;
+    @ViewChild('dateE', { static: true }) pickerEnd;
     @Input() set _valueB(value: Date) {
         if (this.valueE[0] >= value) {
             this.valueB[0] = value;
@@ -30,10 +33,12 @@ export class RangeInputDatetimeComponent implements OnInit {
     // 開始日のOptions
     optionsBigining: FlatpickrOptions;
     beginningDate = new Date();
+    fpBigining = flatpickr('#myID', {});
 
     // 終了日のOptions
     optionsEnd: FlatpickrOptions;
     endDate = new Date();
+    fpEnd = flatpickr('#myID', {});
 
     constructor() {}
     ngOnInit() {
@@ -56,7 +61,6 @@ export class RangeInputDatetimeComponent implements OnInit {
             altFormat: this.isEnableTime ? 'Y-m-d H:i:S' : 'Y-m-d', //表示の書式
             allowInput: true, //直接入力を許可
             altInputClass: 'hoge', //スタイルを適用
-            maxDate: this.valueE[0],
         };
         console.log({ デフォ開始日: this.optionsBigining.defaultDate });
 
@@ -84,8 +88,13 @@ export class RangeInputDatetimeComponent implements OnInit {
         console.log({ 開始日: this.valueB[0], 終了日: this.valueE[0] });
     }
     replaceMinDate() {
-        this.optionsEnd.minDate = this.valueB[0];
-        console.log({ 最小値of終了日: this.optionsEnd.minDate });
+        this.pickerEnd.flatpickr.minDate = this.valueB[0];
+        this.pickerEnd.flatpickr.set({
+            minDate: new Date(this.valueB[0].setDate(this.valueB[0].getDate() + 1)),
+        });
+        console.log({
+            最小値of終了日: new Date(this.pickerEnd.flatpickr.minDate + 1),
+        });
     }
     replaceMaxDate() {
         this.optionsBigining.maxDate = this.valueE[0];
