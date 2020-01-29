@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12">
+        <div class="card accordion">
+            <div class="card-header" (click)="isCollapsed = !isCollapsed">
+                <span style="margin-right: 30px;">
+                    検索条件
+                </span>
+                <span class="float-right" *ngIf="isCollapsed">
+                    <i class="fas fa-plus text-right"></i>
+                </span>
+                <span class="float-right" *ngIf="!isCollapsed">
+                    <i class="fas fa-minus text-right"></i>
+                </span>
+                <span class="mr-5 conf-conditions" *ngIf="!isCollapsed">
+                    <b>条件設定中</b>
+                </span>
+            </div>
+            <div class="card-body" [ngbCollapse]="!isCollapsed">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <ng-content></ng-content>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                        <button class="btn btn-primary float-right">
+                            <span>検索</span>
+                        </button>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

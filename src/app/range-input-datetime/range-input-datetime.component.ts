@@ -88,7 +88,7 @@ export class RangeInputDatetimeComponent implements OnInit {
     replaceMinDate() {
         this.pickerEnd.flatpickr.set({
             minDate: new Date(this.valueB[0].setDate(this.valueB[0].getDate() + 1)),
-        }); //一日刻み選べない問題発生中！！
+        });
     }
     replaceMaxDate() {
         this.pickerBigining.flatpickr.set({
