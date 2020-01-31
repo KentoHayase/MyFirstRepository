@@ -1,8 +1,8 @@
 <div class="form-inline">
     <!-- ↓ 開始値 -->
-    <div class="fornm-group">
+    <div class="form-group">
         <input
-            class="fornm-group"
+            class="form-control"
             pattern="{{ pattern }}"
             [(ngModel)]="fromNum"
             #inputFromNumber="ngModel"
@@ -13,7 +13,7 @@
     <!-- ↓ 終了値 -->
     <div>
         <input
-            class="form-group"
+            class="form-control"
             pattern="{{ pattern }}"
             [(ngModel)]="toNum"
             #inputToNumber="ngModel"
@@ -24,7 +24,7 @@
 <!-- ↓ 範囲のエラーメッセージ -->
 <div *ngIf="!isWrongOrder">
     <div class="errorMessage">
-        範囲が誤
+        範囲が誤っています
     </div>
 </div>
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: "app-range-input-number",
@@ -21,10 +22,11 @@ export class RangeInputNumberComponent implements OnInit {
     }
 
     compareOrder() {
-        if (this.fromNum > this.toNum) {
-            this.isWrongOrder = false;
-        } else {
-            this.isWrongOrder = true;
-        }
+        //     if (Number(this.fromNum) > Number(this.toNum)) {
+        //         this.isWrongOrder = false;
+        //     } else {
+        //         this.isWrongOrder = true;
+        // 	}
+        this.isWrongOrder = Number(this.fromNum) < Number(this.toNum);
     }
 }
