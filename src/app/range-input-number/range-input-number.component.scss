@@ -1,0 +1,11 @@
+.errorMessage {
+    background-color: #ffd6da; /* 赤 */
+    max-width: 100%;
+    float: left;
+    position: absolute;
+    z-index: 1;
+    border-radius: 0.2rem;
+    padding: 0.2rem;
+    margin-top: 0.2rem;
+    font-size: 0.857rem;
+}

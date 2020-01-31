@@ -1,0 +1,56 @@
+<div class="form-inline">
+    <!-- ↓ 開始値 -->
+    <div class="fornm-group">
+        <input
+            class="fornm-group"
+            pattern="{{ pattern }}"
+            [(ngModel)]="fromNum"
+            #inputFromNumber="ngModel"
+            (input)="compareOrder()"
+        />
+    </div>
+    ～
+    <!-- ↓ 終了値 -->
+    <div>
+        <input
+            class="form-group"
+            pattern="{{ pattern }}"
+            [(ngModel)]="toNum"
+            #inputToNumber="ngModel"
+            (input)="compareOrder()"
+        />
+    </div>
+</div>
+<!-- ↓ 範囲のエラーメッセージ -->
+<div *ngIf="!isWrongOrder">
+    <div class="errorMessage">
+        範囲が誤
+    </div>
+</div>
+
+<!-- ↓ 始まりのpatternエラーメッセージ -->
+<div
+    class="errorMessage"
+    *ngIf="
+        inputFromNumber.errors && (inputToNumber.dirty || inputToNumber.touched)
+    "
+>
+    <div class="form-group mr-2" *ngIf="inputFromNumber.errors.pattern">
+        {{ msg }}
+    </div>
+</div>
+
+<!-- ↓ 終わりのpatternエラーメッセージ -->
+<div
+    class="errorMessage"
+    *ngIf="
+        inputToNumber.errors && (inputToNumber.dirty || inputToNumber.touched)
+    "
+>
+    <div
+        class="form-group justify-content-end mr-2"
+        *ngIf="inputToNumber.errors.pattern"
+    >
+        {{ msg }}
+    </div>
+</div>
