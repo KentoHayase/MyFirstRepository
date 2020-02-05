@@ -4,6 +4,8 @@
         <input
             class="form-control"
             pattern="{{ pattern }}"
+            minlength="{{ minLength }}"
+            maxlength="{{ maxLength }}"
             [(ngModel)]="fromNum"
             #inputFromNumber="ngModel"
             (input)="compareOrder()"
@@ -15,6 +17,8 @@
         <input
             class="form-control"
             pattern="{{ pattern }}"
+            minlength="{{ minLength }}"
+            maxlength="{{ maxLength }}"
             [(ngModel)]="toNum"
             #inputToNumber="ngModel"
             (input)="compareOrder()"
@@ -27,30 +31,27 @@
         範囲が誤っています
     </div>
 </div>
-
 <!-- ↓ 始まりのpatternエラーメッセージ -->
 <div
     class="errorMessage"
-    *ngIf="
-        inputFromNumber.errors && (inputToNumber.dirty || inputToNumber.touched)
-    "
+    *ngIf="inputFromNumber.errors && (inputFromNumber.dirty || inputFromNumber.touched)"
 >
     <div class="form-group mr-2" *ngIf="inputFromNumber.errors.pattern">
-        {{ msg }}
+        半角数字のみ入力してください。
+    </div>
+    <div class="form-group mr-2" *ngIf="inputFromNumber.errors.minlength">
+        {{ minLength }}文字以上で入力してください。
     </div>
 </div>
-
 <!-- ↓ 終わりのpatternエラーメッセージ -->
 <div
     class="errorMessage"
-    *ngIf="
-        inputToNumber.errors && (inputToNumber.dirty || inputToNumber.touched)
-    "
+    *ngIf="inputToNumber.errors && (inputToNumber.dirty || inputToNumber.touched)"
 >
-    <div
-        class="form-group justify-content-end mr-2"
-        *ngIf="inputToNumber.errors.pattern"
-    >
-        {{ msg }}
+    <div class="form-group justify-content-end mr-2" *ngIf="inputToNumber.errors.pattern">
+        半角数字のみ入力してください。
+    </div>
+    <div class="form-group mr-2" *ngIf="inputToNumber.errors.minlength">
+        {{ minLength }}文字以上で入力してください。
     </div>
 </div>

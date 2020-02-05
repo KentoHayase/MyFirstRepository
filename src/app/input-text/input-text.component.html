@@ -5,7 +5,7 @@
         name="input_word"
         [(ngModel)]="inputWord"
         #inputInfo="ngModel"
-        required
+        required="{{ isRequired }}"
         minlength="{{ minLength }}"
         maxlength="{{ maxLength }}"
         pattern="{{ pattern }}"
@@ -20,7 +20,7 @@
             {{ minLength }}文字以上で入力してください。
         </div>
         <div class="form-group mr-2" *ngIf="inputInfo.errors.pattern">
-            {{ msg }}
+            {{ patternMsg }}
         </div>
     </form>
 </div>
